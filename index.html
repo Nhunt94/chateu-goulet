@@ -174,53 +174,7 @@ margin-bottom:20px;
     padding:80px 20px;
 }
 
-.media-grid{
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
-    gap:20px;
-    max-width:1400px;
-    margin:0 auto;
-}
 
-.media-card{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
-    border-radius:12px;
-    background:#111;
-}
-
-/* Left Video */
-.media-card:nth-child(1){
-    flex:0.8;
-}
-
-/* Center Slideshow */
-.media-card:nth-child(2){
-    flex:1.4;
-}
-
-/* Right Video */
-.media-card:nth-child(3){
-    flex:0.8;
-}
-
-.media-card video{
-    width:100%;
-    max-height:700px;
-    object-fit:contain;
-    background:#111;
-}
-
-.media-card img{
-    width:100%;
-    height:700px;
-    object-fit:contain;
-    background:#111;
-    border-radius:12px;
-}
 .gallery{
     padding:80px 20px;
 }
@@ -315,7 +269,7 @@ margin-bottom:20px;
     <div class="showcase">
 
         <div id="media-container">
-            <img id="showcase-media" src="rendering.jpg">
+            <img id="showcase-media" src="rendering.jpg" alt="Château Goulet">
         </div>
 
     </div>
@@ -408,53 +362,28 @@ Every detail has been thoughtfully selected to create a home that feels both imp
 
 <script>
 
-const media = [
-
-    {type:"image", src:"rendering.jpg"},
-    {type:"image", src:"construction1.jpg"},
-    {type:"video", src:"video-left.mp4"},
-    {type:"image", src:"construction2.jpg"},
-    {type:"video", src:"video-right.mp4"}
-
+const images = [
+    "rendering.jpg",
+    "construction1.jpg",
+    "construction2.jpg",
+    "construction3.jpg",
+    "construction4.jpg"
 ];
 
 let current = 0;
 
-function showNextMedia(){
+function showNextImage() {
 
     current++;
 
-    if(current >= media.length){
+    if (current >= images.length) {
         current = 0;
     }
 
-    const container = document.getElementById("media-container");
-
-    if(media[current].type === "image"){
-
-        container.innerHTML =
-        `<img src="${media[current].src}" alt="">`;
-
-        setTimeout(showNextMedia, 4000);
-
-    } else {
-
-        container.innerHTML =
-        `
-        <video autoplay muted playsinline>
-            <source src="${media[current].src}" type="video/mp4">
-        </video>
-        `;
-
-        const video = container.querySelector("video");
-
-        video.onended = function(){
-            showNextMedia();
-        };
-    }
+    document.getElementById("showcase-media").src = images[current];
 }
 
-setTimeout(showNextMedia, 4000);
+setInterval(showNextImage, 4000);
 
 </script>
 
